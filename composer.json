@@ -1,5 +1,5 @@
 {
-  "name": "chomenko/CacheCleaner",
+  "name": "chomenko/cache-cleaner",
   "type": "extensions",
   "description": "Cache cleaner for Nette Framework tracy bar",
   "keywords": ["cache", "cleaner"],
