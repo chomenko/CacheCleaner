@@ -3,7 +3,7 @@
   "type": "extensions",
   "description": "Cache cleaner for Nette Framework tracy bar",
   "keywords": ["cache", "cleaner"],
-  "homepage": "https://github.com/chomenko/CacheCliner",
+  "homepage": "https://github.com/chomenko/CacheCleaner",
   "license": [],
   "authors": [
     {
@@ -13,8 +13,7 @@
     }
   ],
   "support": {
-    "email": "mykola.chomenko@dipcom.cz",
-    "issues": "http://git.alistra.cloud/Modules/Paginator"
+    "email": "mykola.chomenko@dipcom.cz"
   },
   "require": {
     "php": "^5.6",
