@@ -1,0 +1,22 @@
+<h1>Cache {$size|bytes}, {count($files)} files</h1>
+<div class="tracy-inner">
+    <div style="max-height: 400px; overflow: hidden; overflow-y: auto;">
+        <table style="min-width: 400px; margin-bottom: 10px;">
+            <thead>
+                <tr>
+                    <th>File</th>
+                    <th>Size</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr n:foreach="$files as $file">
+                    <td>{$file['file']}</td>
+                    <td>{$file['size']|bytes}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align: right;">
+        <a href="{$url}" style="padding: 0px 10px 0px 10px; line-height: 31px; background: #438bf2; color: white; display: inline-table;">Remove cache</a>
+    </div>
+</div>
