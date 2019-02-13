@@ -58,6 +58,10 @@ class Cleaner
 	 */
 	private function scan($dir, &$files = [], &$size)
 	{
+		if (!is_dir($dir)) {
+			return;
+		}
+
 		/** @var \SplFileInfo $file */
 		foreach (Finder::findFiles('*')->in($dir) as $file) {
 			if (array_search($file->getFilename(), $this->config->getIgnoreFiles()) === FALSE) {
