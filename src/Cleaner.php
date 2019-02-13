@@ -88,7 +88,7 @@ class Cleaner
 	{
 		["files" => $files, "size" => $size] = $this->getFileList();
 		foreach ($files as $file) {
-			unlink($file['file']);
+			@unlink($file['file']);
 		}
 	}
 
