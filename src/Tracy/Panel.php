@@ -8,7 +8,6 @@
 namespace Chomenko\CacheCleaner\Tracy;
 
 use Chomenko\CacheCleaner\Cleaner;
-use Nette\Utils\Finder;
 use Nette\Utils\Html;
 use Tracy\IBarPanel;
 use Latte;

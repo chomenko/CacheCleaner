@@ -10,11 +10,16 @@ composer require chomenko/cache-cleaner
 
 ## Configuration
 
-register extension
-```neon
-extensions:
-    CacheCleaner: Chomenko\CacheCleaner\DI\CacheCleanerExtension
-```
+Register extension
+
+````php
+<?php
+//bootstrap.php
+
+$configurator = new Nette\Configurator();
+$configurator->addParameters();
+\Chomenko\CacheCleaner\DI\CacheCleanerExtension::register($configurator);
+````
 
 **Optional configuration** <br>
 ``dirs`` directory list for clean <br>

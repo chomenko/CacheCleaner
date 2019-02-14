@@ -7,17 +7,13 @@
 namespace Chomenko\CacheCleaner\Console;
 
 use Chomenko\CacheCleaner\Cleaner;
+use Chomenko\CacheCleaner\CleanerFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CacheCommand extends Command
 {
-
-	/**
-	 * @var Cleaner @inject
-	 */
-	public $cleaner;
 
 	protected function configure()
 	{
@@ -32,8 +28,9 @@ class CacheCommand extends Command
 	 */
 	public function execute(InputInterface $input, OutputInterface $output)
 	{
-		$data = $this->cleaner->getFileList();
-		$this->cleaner->clean();
+		$cleaner = CleanerFactory::getCleaner();
+		$data = $cleaner->getFileList();
+		$cleaner->clean();
 		$count = count($data["files"]);
 
 		$message = "Cache success remove. Remove {$count} files.";

@@ -6,14 +6,17 @@
 
 namespace Chomenko\CacheCleaner;
 
-use Nette\Application\Application;
+use Chomenko\CacheCleaner\Console\CacheCommand;
 use Nette\Http\Request;
 use Nette\Http\Url;
 use Nette\Utils\Finder;
-use Tracy\Debugger;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class Cleaner
 {
+
+	const COMMAND_NAME = "cache:clean";
 
 	/**
 	 * @var Config
@@ -96,15 +99,29 @@ class Cleaner
 		}
 	}
 
-	/**
-	 * @param Application $app
-	 */
-	public function actionClean(Application $app)
+	public function actionClean()
 	{
-		if (Debugger::$productionMode) {
-			return;
+		if (php_sapi_name() == "cli") {
+			$this->cliAction();
+		} else {
+			$this->requestAction();
 		}
+	}
 
+	private function cliAction()
+	{
+		$argv = isset($_SERVER['argv']) ? $_SERVER['argv'] : [];
+		if (isset($argv[1]) && $argv[1] === self::COMMAND_NAME) {
+			$input = new ArrayInput([]);
+			$output = new ConsoleOutput();
+			$command = new CacheCommand(self::COMMAND_NAME);
+			$command->execute($input, $output);
+			exit;
+		}
+	}
+
+	private function requestAction()
+	{
 		$url = clone $this->request->getUrl();
 		$clean = $url->getQueryParameter("panel_action");
 
