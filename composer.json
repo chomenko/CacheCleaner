@@ -22,7 +22,7 @@
     "nette/neon": ">=2.4",
     "kdyby/console": "^2.7",
     "nette/http": "^2.4",
-    "nette/latte": ">=2.5"
+    "nette/latte": ">=2.4"
   },
   "autoload": {
     "psr-4": {
