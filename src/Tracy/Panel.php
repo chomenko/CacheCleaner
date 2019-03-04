@@ -60,7 +60,7 @@ class Panel implements IBarPanel
 			'size' => $size,
 			'url' => $this->cleaner->createCleanUrl(),
 		];
-		return Html::el()->addHtml($this->getIconHtml())->addText(Latte\Runtime\Filters::bytes($size));
+		return (string)Html::el()->addHtml($this->getIconHtml())->addText(Latte\Runtime\Filters::bytes($size));
 	}
 
 	/**
@@ -69,7 +69,7 @@ class Panel implements IBarPanel
 	public function getPanel()
 	{
 		$latte = new Latte\Engine;
-		return $latte->renderToString(__DIR__ . '/panel.latte', $this->_data);
+		return (string)$latte->renderToString(__DIR__ . '/panel.latte', $this->_data);
 	}
 
 }

@@ -16,9 +16,10 @@ Register extension
 <?php
 //bootstrap.php
 
+use Chomenko\CacheCleaner\DI\CacheCleanerExtension;
+
 $configurator = new Nette\Configurator();
-$configurator->addParameters();
-\Chomenko\CacheCleaner\DI\CacheCleanerExtension::register($configurator);
+CacheCleanerExtension::register($configurator);
 ````
 
 **Optional configuration** <br>
