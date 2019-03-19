@@ -30,7 +30,9 @@ class CacheCleanerExtension extends CompilerExtension
 			->addTag("kdyby.console");
 	}
 
-
+	/**
+	 * @param Nette\PhpGenerator\ClassType $class
+	 */
 	public function afterCompile(Nette\PhpGenerator\ClassType $class)
 	{
 		$ini = $class->getMethod("initialize");
@@ -52,8 +54,22 @@ class CacheCleanerExtension extends CompilerExtension
 		$parameters = $configuration["parameters"];
 		$tempDir = $parameters["tempDir"];
 
+		$search = [];
+		$replace = [];
+		foreach ($parameters as $parameterName => $value) {
+			if (is_string($value)) {
+				$search[] = "%" . $parameterName . "%";
+				$replace[] = $value;
+			}
+		}
+
 		if (array_key_exists($name, $configuration)) {
 			$config = $configuration[$name];
+			if(isset($config["dirs"]) && is_array($config["dirs"])) {
+				foreach ($config["dirs"] as $key => $dir) {
+					$config["dirs"][$key] = str_replace($search, $replace, $dir);
+				}
+			}
 		}
 
 		if (!isset($config["dirs"])) {
@@ -77,8 +93,7 @@ class CacheCleanerExtension extends CompilerExtension
 	{
 		$configurator->onCompile[] = function (Configurator $configurator, Compiler $compiler) {
 			$name = "CacheCleaner";
-			$config = self::getConfiguration($name, $compiler);
-			CleanerFactory::setConfig($config);
+			CleanerFactory::setConfig(self::getConfiguration($name, $compiler));
 			CleanerFactory::initialize();
 			$compiler->addExtension('CacheCleaner', new CacheCleanerExtension());
 		};
