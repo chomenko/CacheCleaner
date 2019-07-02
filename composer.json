@@ -21,7 +21,7 @@
     "nette/caching": "^3.0",
     "nette/neon": ">=2.4",
     "kdyby/console": "^2.7",
-    "nette/http": "^2.4",
+    "nette/http": "^3.0",
     "latte/latte": ">=2.4"
   },
   "autoload": {
